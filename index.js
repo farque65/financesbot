@@ -2,6 +2,8 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var request = require('request');
 var app = express();
+var _ = require('lodash');
+
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 
 app.use(bodyParser.urlencoded({extended: false}));
@@ -47,9 +49,15 @@ app.post('/webhook', function (req, res) {
     for (i = 0; i < events.length; i++) {
         var event = events[i];
         if (event.message && event.message.text) {
-            // Process Reply
-            var reply = "Hello From Finance Bot";
+            
+            var reply;
 
+            // Send Test Message
+            if(_.isEqual(event.message.text, 'test_message')) {
+                reply = "Hello, test message confirmed";
+            }
+
+            //send reply
             sendMessage(event.sender.id, {text: reply});
     
         } 
