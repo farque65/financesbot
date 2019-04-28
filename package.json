@@ -12,6 +12,6 @@
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "request": "^2.73.0",
-    "lodash": "3.10.1"
+    "lodash": "4.17.11"
   }
 }
