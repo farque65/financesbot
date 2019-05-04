@@ -101,6 +101,15 @@ function authorize(credentials, callback) {
 }
 
 function getNewToken(oAuth2Client, callback) {
+    const authUrl = oAuth2Client.generateAuthUrl({
+        access_type: 'offline',
+        scope: SCOPES,
+      });
+      console.log('Authorize this app by visiting this url:', authUrl);
+      const rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout,
+      });
     oAuth2Client.getToken('4/QAGLF5AOi04UIMPO2k6zrsZfUC5zboFRG3KNneE5b_qk45DyIRSWT3E', (err, token) => {
         if (err) return console.error('Error while trying to retrieve access token', err);
         console.log(oAuth2Client);
