@@ -117,7 +117,7 @@ function getNewToken(oAuth2Client, callback) {
     input: process.stdin,
     output: process.stdout,
   });
-  rl.question('Enter the code from that page here: 4/QAGLF5AOi04UIMPO2k6zrsZfUC5zboFRG3KNneE5b_qk45DyIRSWT3E', (code) => {
+  rl.question('4/QAGLF5AOi04UIMPO2k6zrsZfUC5zboFRG3KNneE5b_qk45DyIRSWT3E', (code) => {
     console.log("getting token");
     rl.close();
     
