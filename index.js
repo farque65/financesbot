@@ -53,36 +53,26 @@ app.post('/webhook', function (req, res) {
             
             var reply;
 
-            async.waterfall([
-                function getMessage (cb) {
-                    // Send Test Message
-                    if(_.isEqual(event.message.text, 'test_message')) {
-                        reply = "Hello, test message confirmed";
-                    }
+            // Send Test Message
+            if(_.isEqual(event.message.text, 'test_message')) {
+                reply = "Hello, test message confirmed";
+            }
 
-                    request({
-                        url: 'https://www.googleapis.com/auth/spreadsheets.readonly',
-                        spreadsheetId: process.env.SHEET_ID,
-                        auth: process.env.FINNOW_ID,
-                    }, function(error, response, body) {
-                        if (error) {
-                            console.log('Error sending message: ', error);
-                        } else if (response.body.error) {
-                            console.log('Error: ', response.body.error);
-                        }
-                        console.log("NO ERROR ", response, body);
-                        return;
-                    });
-
-
-                    cb(null, reply);
-                },
-                function sendMessengerMessage(reply, cb) {
-                    //send reply
-                    sendMessage(event.sender.id, {text: reply});
-                    cb();
+            request({
+                url: 'https://www.googleapis.com/auth/spreadsheets.readonly',
+                spreadsheetId: process.env.SHEET_ID,
+                auth: process.env.FINNOW_ID,
+            }, function(error, response, body) {
+                if (error) {
+                    console.log('Error sending message: ', error);
+                } else if (response.body.error) {
+                    console.log('Error: ', response.body.error);
                 }
-            ], done);
+                console.log("NO ERROR ", response, body);
+                
+                //send reply
+                sendMessage(event.sender.id, {text: reply});
+            });    
         } 
     }
     res.sendStatus(200);
