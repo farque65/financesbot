@@ -61,7 +61,7 @@ app.post('/webhook', function (req, res) {
 
                     request({
                         url: 'https://www.googleapis.com/auth/spreadsheets.readonly',
-                        spreadsheetId: '19z1SwvkNyTke_OQu0ciA690tH2lAA8719H8kWVoIySg',
+                        spreadsheetId: process.env.SHEET_ID,
                         auth: process.env.FINNOW_ID,
                     }, function(error, response, body) {
                         if (error) {
