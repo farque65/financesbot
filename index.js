@@ -113,7 +113,7 @@ return getNewToken(oAuth2Client, callback);
 
 function getNewToken(oAuth2Client, callback) {
   const authUrl = oAuth2Client.generateAuthUrl({
-    access_type: 'offline',
+    access_type: 'online',
     scope: SCOPES,
   });
   console.log('Authorize this app by visiting this url:', authUrl);
@@ -126,11 +126,6 @@ function getNewToken(oAuth2Client, callback) {
     oAuth2Client.getToken(code, (err, token) => {
       if (err) return console.error('Error while trying to retrieve access token', err);
       oAuth2Client.setCredentials(token);
-      // Store the token to disk for later program executions
-      fs.writeFile(TOKEN_PATH, JSON.stringify(token), (err) => {
-        if (err) return console.error(err);
-        console.log('Token stored to', TOKEN_PATH);
-      });
       callback(oAuth2Client);
     });
   });
