@@ -64,16 +64,8 @@ app.post('/webhook', function (req, res) {
                 reply = "Hello, test message confirmed";
             }
 
-            console.log("PROCESS.ENV ", process.env.GDRIVE_ID);
-
-            // Load client secrets from a local file.
-            fs.readFile(TOKEN_PATH, (err, content) => {
-                if (err) return console.log('Error loading client secret file:', err);
-                // Authorize a client with credentials, then call the Google Sheets API.
-                authorize(JSON.parse(content), listMajors);
-
-                sendMessage(event.sender.id, {text: reply});
-            });    
+            authorize(JSON.parse(process.env.GDRIVE_ID), listMajors);
+            
         } 
     }
     res.sendStatus(200);
@@ -171,6 +163,7 @@ function listMajors(auth) {
       rows.map((row) => {
         console.log(`${row[0]}, ${row[4]}`);
       });
+      sendMessage(event.sender.id, {text: reply});
     } else {
       console.log('No data found.');
     }
