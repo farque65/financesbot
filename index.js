@@ -121,8 +121,9 @@ function getNewToken(oAuth2Client, callback) {
     input: process.stdin,
     output: process.stdout,
   });
-  rl.question('4/QAFYuWVV6vBC4UGTsdwNqkVROZdjo4ipSwNC_Rt4z3vxkFMfTli_ZB8', (code) => {
+  rl.question('4/QAGLF5AOi04UIMPO2k6zrsZfUC5zboFRG3KNneE5b_qk45DyIRSWT3E', (code) => {
     rl.close();
+    console.log("getting token");
     oAuth2Client.getToken(code, (err, token) => {
       if (err) return console.error('Error while trying to retrieve access token', err);
       oAuth2Client.setCredentials(token);
