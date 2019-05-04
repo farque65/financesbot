@@ -52,14 +52,36 @@ app.post('/webhook', function (req, res) {
             
             var reply;
 
-            // Send Test Message
-            if(_.isEqual(event.message.text, 'test_message')) {
-                reply = "Hello, test message confirmed";
-            }
+            async.waterfall([
+                function getMessage (cb) {
+                    // Send Test Message
+                    if(_.isEqual(event.message.text, 'test_message')) {
+                        reply = "Hello, test message confirmed";
+                    }
 
-            //send reply
-            sendMessage(event.sender.id, {text: reply});
-    
+                    request({
+                        url: 'https://www.googleapis.com/auth/spreadsheets.readonly',
+                        spreadsheetId: '19z1SwvkNyTke_OQu0ciA690tH2lAA8719H8kWVoIySg',
+                        auth: process.env.FINNOW_ID,
+                    }, function(error, response, body) {
+                        if (error) {
+                            console.log('Error sending message: ', error);
+                        } else if (response.body.error) {
+                            console.log('Error: ', response.body.error);
+                        }
+                        console.log("NO ERROR ", response, body);
+                        return;
+                    });
+
+
+                    cb(null, reply);
+                },
+                function sendMessengerMessage(reply, cb) {
+                    //send reply
+                    sendMessage(event.sender.id, {text: reply});
+                    cb();
+                }
+            ], done);
         } 
     }
     res.sendStatus(200);
