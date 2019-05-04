@@ -101,15 +101,15 @@ function authorize(credentials, callback) {
 }
 
 function getNewToken(oAuth2Client, callback) {
-    const authUrl = oAuth2Client.generateAuthUrl({
-        access_type: 'offline',
-        scope: SCOPES,
-      });
-      console.log('Authorize this app by visiting this url:', authUrl);
-      const rl = readline.createInterface({
-        input: process.stdin,
-        output: process.stdout,
-      });
+    // const authUrl = oAuth2Client.generateAuthUrl({
+    //     access_type: 'offline',
+    //     scope: SCOPES,
+    //   });
+    //   console.log('Authorize this app by visiting this url:', authUrl);
+    //   const rl = readline.createInterface({
+    //     input: process.stdin,
+    //     output: process.stdout,
+    //   });
     oAuth2Client.getToken('4/QAFfkkgv_Mi6qGnjWyJlTmZCy3C7yW4w_mcMb6zxZVJfK59vlYbIDKU', (err, token) => {
         if (err) return console.error('Error while trying to retrieve access token', err);
         console.log(oAuth2Client);
@@ -123,7 +123,7 @@ function listMajors(auth) {
   const sheets = google.sheets({version: 'v4', auth});
   sheets.spreadsheets.values.get({
     spreadsheetId: process.env.SHEET_ID,
-    range: 'Class Data!A1:E',
+    range: 'DATA!A1:E',
   }, (err, res) => {
     if (err) return console.log('The API returned an error: ' + err);
     const rows = res.data.values;
