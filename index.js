@@ -64,6 +64,8 @@ app.post('/webhook', function (req, res) {
                 reply = "Hello, test message confirmed";
             }
 
+            console.log("PROCESS.ENV ", process.env.GDRIVE_ID);
+
             // Load client secrets from a local file.
             fs.readFile(TOKEN_PATH, (err, content) => {
                 if (err) return console.log('Error loading client secret file:', err);
@@ -96,6 +98,8 @@ function sendMessage(recipientId, message) {
         }
     });
 };
+
+
 
 
 /**
