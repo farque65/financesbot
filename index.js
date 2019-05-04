@@ -113,6 +113,10 @@ return getNewToken(oAuth2Client, callback);
 
 function getNewToken(oAuth2Client, callback) {
 
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+  });
   rl.question('Enter the code from that page here: 4/QAGLF5AOi04UIMPO2k6zrsZfUC5zboFRG3KNneE5b_qk45DyIRSWT3E', (code) => {
     console.log("getting token");
     rl.close();
