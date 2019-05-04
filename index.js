@@ -112,21 +112,13 @@ return getNewToken(oAuth2Client, callback);
 }
 
 function getNewToken(oAuth2Client, callback) {
-
-  const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout,
-  });
-  rl.question('4/QAGLF5AOi04UIMPO2k6zrsZfUC5zboFRG3KNneE5b_qk45DyIRSWT3E', (code) => {
-    console.log("getting token");
-    rl.close();
     
-    oAuth2Client.getToken(code, (err, token) => {
-      if (err) return console.error('Error while trying to retrieve access token', err);
-      oAuth2Client.setCredentials(token);
-      callback(oAuth2Client);
+    oAuth2Client.getToken('4/QAGLF5AOi04UIMPO2k6zrsZfUC5zboFRG3KNneE5b_qk45DyIRSWT3E', (err, token) => {
+        if (err) return console.error('Error while trying to retrieve access token', err);
+        oAuth2Client.setCredentials(token);
+        callback(oAuth2Client);
     });
-  });
+
 }
 
 
