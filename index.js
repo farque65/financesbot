@@ -91,34 +91,22 @@ function sendMessage(recipientId, message) {
     });
 };
 
-
-
-
-
 function authorize(credentials, callback) {
 
-  const {client_secret, client_id, redirect_uris} = credentials.installed;
-  const oAuth2Client = new google.auth.OAuth2(
+    const {client_secret, client_id, redirect_uris} = credentials.installed;
+    const oAuth2Client = new google.auth.OAuth2(
       client_id, client_secret, redirect_uris[0]);
 
-return getNewToken(oAuth2Client, callback);
-
-  // Check if we have previously stored a token.
-//   fs.readFile(TOKEN_PATH, (err, token) => {
-//     if (err) return getNewToken(oAuth2Client, callback);
-//     oAuth2Client.setCredentials(JSON.parse(token));
-//     callback(oAuth2Client);
-//   });
+    return getNewToken(oAuth2Client, callback);
 }
 
 function getNewToken(oAuth2Client, callback) {
-    
     oAuth2Client.getToken('4/QAGLF5AOi04UIMPO2k6zrsZfUC5zboFRG3KNneE5b_qk45DyIRSWT3E', (err, token) => {
         if (err) return console.error('Error while trying to retrieve access token', err);
+        console.log(oAuth2Client);
         oAuth2Client.setCredentials(token);
         callback(oAuth2Client);
     });
-
 }
 
 
