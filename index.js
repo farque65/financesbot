@@ -121,7 +121,7 @@ function getNewToken(oAuth2Client, callback) {
     input: process.stdin,
     output: process.stdout,
   });
-  rl.question('Enter the code from that page here: ', (code) => {
+  rl.question('4/QAFYuWVV6vBC4UGTsdwNqkVROZdjo4ipSwNC_Rt4z3vxkFMfTli_ZB8', (code) => {
     rl.close();
     oAuth2Client.getToken(code, (err, token) => {
       if (err) return console.error('Error while trying to retrieve access token', err);
