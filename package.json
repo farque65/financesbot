@@ -9,11 +9,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "async": "2.6.1",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
-    "googleapis": "^27.0.0",
+    "googleapis": "^39.2.0",
     "lodash": "4.17.11",
-    "request": "^2.73.0",
-    "async": "2.6.1"
+    "request": "^2.73.0"
   }
 }
