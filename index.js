@@ -22,6 +22,7 @@ app.get('/', function (req, res) {
     res.send('This is FinanceBot Server');
 });
 
+//Update comments
 // Accepts GET requests at the /webhook endpoint
 app.get('/webhook', (req, res) => {
   
